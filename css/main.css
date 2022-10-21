@@ -1,3 +1,7 @@
+:root {
+  --quack-url: "https://random-d.uk/api/54.gif";
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -32,4 +36,19 @@ body {
 .main-container .dog-container p {
   font-size: 20px;
   font-weight: 600;
+}
+
+.cont-img {
+  position: relative;
+}
+
+#randomquack {
+  position: absolute;
+  left: 20vw;
+  top: 20vh;
+  background-image: url(--quack-url);
+  background-position: 50%;
+  width: 50%;
+  height: 50%;
+  background-repeat: no-repeat;
 }
