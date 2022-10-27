@@ -42,13 +42,8 @@ body {
   position: relative;
 }
 
-#randomquack {
+.dog-container {
   position: absolute;
   left: 20vw;
   top: 20vh;
-  background-image: url(--quack-url);
-  background-position: 50%;
-  width: 50%;
-  height: 50%;
-  background-repeat: no-repeat;
 }
