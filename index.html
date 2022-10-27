@@ -11,11 +11,29 @@
 
 <body>
   <main class="main-container">
-    <h1 class="top">All Dogs Go 2 Heaven</h1>
+    <nav class="navigation">
+      <div class="logo">
+        <img src="../img/inteMinBild.png" alt="doge" width="120" height="100" class="doge">
+        <h1 class="top">All Dogs Go 2 Heaven</h1>
+      </div>
+    </nav>
+
     <div class="cont-img">
       <div class="dog-container">
-        <p id="randomDog">here be text</p> <!-- style="display:none ;" -->
+        <img src="" alt="A dog" id="dogHome">
       </div>
+      <h3>Join the club</h3>
+      <form id="formular">
+        <label for="firstName">Namn:</label>
+        <input type="text" id="firstName" placeholder="T.ex Maximilian">
+        <label for="lastName">Efternamn:</label>
+        <input type="text" id="lastName" placeholder="Johansson">
+        <label>
+          <input id="consent" type="checkbox">
+          Jag samtycker till att min info sparas
+        </label>
+        <input id="send" type="submit" value="Skicka">
+      </form>
     </div>
   </main>
 
