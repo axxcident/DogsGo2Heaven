@@ -1,7 +1,10 @@
+/* Lägg till kapitel i css koden */
+
 :root {
   --nav-blue: #89cef8;
   --BG-blue: #8dc7e7;
   --text-fill: #2185c3;
+  --wall-white: #f3f9fa;
 }
 
 * {
@@ -14,6 +17,8 @@ body {
   background-image: url("../img/light-blue-aesthetic.png");
   background-repeat: repeat;
   height: 100vh;
+  z-index: 1;
+  overflow-x: hidden;
 }
 
 .main-container {
@@ -29,12 +34,13 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 5;
 }
 
 .logo {
   background-color: var(--nav-blue);
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .navigation .logo .doge {
@@ -79,4 +85,45 @@ body {
   max-width: 720px;
   max-height: 500px;
   background-color: var(--BG-blue);
+}
+
+/* Flödes- kolumnen  */
+
+.flow-column {
+  position: relative;
+  height: 150vh;
+  width: 50vw;
+  margin: 0 auto;
+  padding: 15px;
+  z-index: 4;
+  background-color: var(--wall-white);
+  top: 100px;
+}
+
+/* .post-2flow {
+  border: black 2px solid;
+} */
+#post-typing {
+  width: 80%;
+  border-radius: 20px;
+  height: 38px;
+}
+
+#post-publishing {
+  margin-left: 20px;
+  padding: 10px;
+  background-color: var(--text-fill);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--wall-white);
+  border: none;
+  border-radius: 20px;
+}
+
+#post-publishing:hover {
+  cursor: pointer;
+}
+
+.inlagg {
+  margin: 15px;
 }

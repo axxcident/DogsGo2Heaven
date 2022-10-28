@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 
 <head>
   <meta charset="UTF-8">
@@ -18,10 +18,33 @@
       </div>
     </nav>
 
+    <!-- formulär med knapp som postar. funktion som lägger till article i flöde. -->
+    <section class="flow-column">
+      <article class="post-2flow inlagg">
+        <form>
+          <input type="text" id="post-typing" placeholder="   What's going on?">
+          <input type="submit" id="post-publishing" value="Publicera">
+        </form>
+      </article>
+      <!-- lägg space mellan artiklar -->
+      <article class="inlagg">
+        <img src="" alt="" class="avatar">
+        <h5 class="post-name">John Doe</h5>
+        <p class="post-text">
+          I think we should stop with currency and start with crypto!
+        </p>
+      </article>
+    </section>
+
+
+    <!-- Dog-image, knsk ta bort och göra en FB kolum nm fake-inlägg.
     <div class="cont-img">
       <div class="dog-container">
         <img src="" alt="A dog" id="dogHome">
       </div>
+
+      cta button & text
+      Knapp höger hörn med formen som dyker upp när man klickar den
       <h3>Join the club</h3>
       <form id="formular">
         <label for="firstName">Namn:</label>
@@ -34,7 +57,10 @@
         </label>
         <input id="send" type="submit" value="Skicka">
       </form>
-    </div>
+
+    </div> -->
+
+
   </main>
 
   <script src="app.js"></script>
