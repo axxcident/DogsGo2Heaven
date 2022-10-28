@@ -9,10 +9,10 @@ showMessage(inslag); */
 
 // lägg till beskrivning av allt
 
-let hundelement = document.querySelector('#dogHome')
+/* let hundelement = document.querySelector('#dogHome')
 // Fetching image or gif.
 fetch('https://random.dog/woof.json')
   .then(response => response.json())
   .then(result => {
     hundelement.setAttribute('src', result.url)
-  });
+  }); */
