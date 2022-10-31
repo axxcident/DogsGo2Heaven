@@ -41,12 +41,13 @@ body {
   background-color: var(--nav-blue);
   display: flex;
   justify-content: flex-start;
+  padding: 20px;
 }
 
 .navigation .logo .doge {
   display: flex;
   background-color: var(--nav-blue);
-  border-radius: 5px;
+  border-radius: 60px;
 }
 
 .navigation .logo .top {
@@ -97,7 +98,7 @@ body {
   padding: 15px;
   z-index: 4;
   background-color: var(--wall-white);
-  top: 100px;
+  top: 141px;
 }
 
 /* .post-2flow {
