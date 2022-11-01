@@ -28,30 +28,24 @@ formular.addEventListener("submit", event => {
   flowet.insertBefore(nyArtikel, toppen);
 });
 
-// Testar Axios. Började med "npm install axios".
-/* const axios = require('axios').default;
+fetch("http://localhost:3000/jokes", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json"
+  }
+})
+  .then(responsen => responsen)
+  .then(res => console.log(res))
 
-axios({
-  method: 'get',
+// Kan jag hämta skämt från APIn? NEJ. Jag behöver json-server.
+/* fetch('https://icanhazdadjoke.com/', {
+  method: "GET",
   headers: {
     'Content-Type': 'text/plain'
   }
 })
   .then(response => response)
-  .then(result => { console.log(result) }); */
-
-
-
-// Kan jag hämta skämt från APIn? NEJ. Jag behöver Axios.
-/* fetch('https://icanhazdadjoke.com/', {
-  method: "GET",
-  headers: {
-    'Content-Type': 'text/plain'
-  },
-  mode: 'cors'
-})
-  .then(response => response)
-  .then(result => { console.log(result) }); */
+  .then(result => { databasen["jokes"] = result }); */
 
 
 // HÄMTA HUNBDBILDER

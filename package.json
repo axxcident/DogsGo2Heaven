@@ -3,6 +3,24 @@
     "lite-server": "^2.6.1"
   },
   "scripts": {
-    "dev": "lite-server"
-  }
+    "dev": "lite-server",
+    "json:server": "json-server --watch db.json"
+  },
+  "dependencies": {
+    "json-server": "^0.17.0"
+  },
+  "name": "dogsgo2heaven",
+  "description": "They go there.. right?",
+  "version": "1.0.0",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/axxcident/DogsGo2Heaven.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/axxcident/DogsGo2Heaven/issues"
+  },
+  "homepage": "https://github.com/axxcident/DogsGo2Heaven#readme"
 }
