@@ -6,6 +6,7 @@ const pubKnappen = document.getElementById("post-publishing");
 // const textfalt = document.getElementById("post-typing");
 const flowet = document.querySelector("body > main > section");
 
+// när man klickar på knapp ska formulär-noden köra detta.
 formular.addEventListener("submit", event => {
   // Hindrar sidan från att ladda om. KNSK ta bort och göra AEL knapp så att inläggstext försvinner.
   event.preventDefault();
@@ -27,22 +28,30 @@ formular.addEventListener("submit", event => {
   flowet.insertBefore(nyArtikel, toppen);
 });
 
+// Testar Axios. Började med "npm install axios".
+/* const axios = require('axios').default;
 
-/* // Selecta listan och bestam typ av lista. BESTÄMM NY KLASS
-let olelement = document.querySelector('ol');
-olelement.setAttribute('type', 'i');
+axios({
+  method: 'get',
+  headers: {
+    'Content-Type': 'text/plain'
+  }
+})
+  .then(response => response)
+  .then(result => { console.log(result) }); */
 
-let lien = document.createElement('li');
-let liText = document.createTextNode('Sandra');
-lien.appendChild(liText);
 
-// Lägga in element (sist) in i container
-// olelement.appendChild(lien);
 
-//Lägga in vart du vill.
-let tvåan = document.querySelector('#players > ol > li:nth-child(1)');
-olelement.insertBefore(lien, tvåan);
- */
+// Kan jag hämta skämt från APIn? NEJ. Jag behöver Axios.
+/* fetch('https://icanhazdadjoke.com/', {
+  method: "GET",
+  headers: {
+    'Content-Type': 'text/plain'
+  },
+  mode: 'cors'
+})
+  .then(response => response)
+  .then(result => { console.log(result) }); */
 
 
 // HÄMTA HUNBDBILDER
