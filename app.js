@@ -28,14 +28,14 @@ formular.addEventListener("submit", event => {
   flowet.insertBefore(nyArtikel, toppen);
 });
 
-fetch("http://localhost:3000/jokes", {
+/* fetch("http://localhost:3000/jokes", {
   method: "GET",
   headers: {
     "Content-Type": "application/json"
   }
 })
-  .then(responsen => responsen)
-  .then(res => console.log(res))
+.then(responsen => responsen)
+.then(res => console.log(res)) */
 
 // Kan jag hämta skämt från APIn? NEJ. Jag behöver json-server.
 /* fetch('https://icanhazdadjoke.com/', {
@@ -44,8 +44,8 @@ fetch("http://localhost:3000/jokes", {
     'Content-Type': 'text/plain'
   }
 })
-  .then(response => response)
-  .then(result => { databasen["jokes"] = result }); */
+.then(response => response)
+.then(result => { databasen["jokes"] = result }); */
 
 
 // HÄMTA HUNBDBILDER
