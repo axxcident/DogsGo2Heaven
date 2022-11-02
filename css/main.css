@@ -152,9 +152,9 @@ body {
 }
 
 .inlagg {
-  margin: 10px 5px 25px;
+  margin: 70px 5px 60px;
   display: grid;
-  gap: 3px;
+  gap: 0;
   height: 75px;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, 1fr);

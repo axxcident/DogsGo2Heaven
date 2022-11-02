@@ -28,11 +28,8 @@ formular.addEventListener("submit", event => {
   flowet.insertBefore(nyArtikel, toppen);
 });
 
-// Selecta <p>
+// Selecta <p> för funktionen.
 let dummyTexts = document.querySelectorAll("#jokeText");
-console.log(dummyTexts);
-
-//selecta annars i funktionen.
 
 // Funktion för att populatta Nod som heter jokeText.
 const getJoke = async function (Noden) {
@@ -46,31 +43,12 @@ const getJoke = async function (Noden) {
 }
 
 // KOLLA UPP. set intervall synkront.
-
+// call:a fetch-funktionen per loop-item i en for-loop.
 dummyTexts.forEach(kul => {
   kul = getJoke(kul);
 });
 
-// dummyTexts.forEach(kul => {
-//   kul.innerHTML = jokeObj.joke;
-// });
-// jokeText.innerHTML = jokeObj.joke;
 
-
-// for (let i = 0; i < dummyTexts.length; i++) {
-//   dummyTexts[i].innerHTML = getJoke();
-// }
-
-
-
-fetch('https://icanhazdadjoke.com/', {
-  method: "GET",
-  headers: {
-    'Accept': 'application/json'
-  }
-})
-  .then(response => response.json())
-  .then(result => { console.log(result.joke) });
 
 
 // HÄMTA HUNBDBILDER
@@ -89,3 +67,13 @@ fetch('https://random.dog/woof.json')
 }
 let inslag = "woof woof";
 showMessage(inslag); */
+
+// Reserv-fetch (FUNGERAR) för pappa-skämtsidan.
+/* fetch('https://icanhazdadjoke.com/', {
+  method: "GET",
+  headers: {
+    'Accept': 'application/json'
+  }
+})
+  .then(response => response.json())
+  .then(result => { console.log(result.joke) }); */
