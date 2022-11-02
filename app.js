@@ -28,24 +28,49 @@ formular.addEventListener("submit", event => {
   flowet.insertBefore(nyArtikel, toppen);
 });
 
-/* fetch("http://localhost:3000/jokes", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json"
-  }
-})
-.then(responsen => responsen)
-.then(res => console.log(res)) */
+// Selecta <p>
+let dummyTexts = document.querySelectorAll("#jokeText");
+console.log(dummyTexts);
 
-// Kan jag hämta skämt från APIn? NEJ. Jag behöver json-server.
-/* fetch('https://icanhazdadjoke.com/', {
+//selecta annars i funktionen.
+
+// Funktion för att populatta Nod som heter jokeText.
+const getJoke = async function (Noden) {
+  const jokeData = await fetch('https://icanhazdadjoke.com/', {
+    headers: {
+      "Accept": "application/json"
+    }
+  });
+  const jokeObj = await jokeData.json();
+  Noden.innerHTML = jokeObj.joke;
+}
+
+// KOLLA UPP. set intervall synkront.
+
+dummyTexts.forEach(kul => {
+  kul = getJoke(kul);
+});
+
+// dummyTexts.forEach(kul => {
+//   kul.innerHTML = jokeObj.joke;
+// });
+// jokeText.innerHTML = jokeObj.joke;
+
+
+// for (let i = 0; i < dummyTexts.length; i++) {
+//   dummyTexts[i].innerHTML = getJoke();
+// }
+
+
+
+fetch('https://icanhazdadjoke.com/', {
   method: "GET",
   headers: {
-    'Content-Type': 'text/plain'
+    'Accept': 'application/json'
   }
 })
-.then(response => response)
-.then(result => { databasen["jokes"] = result }); */
+  .then(response => response.json())
+  .then(result => { console.log(result.joke) });
 
 
 // HÄMTA HUNBDBILDER
