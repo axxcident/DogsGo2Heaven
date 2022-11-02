@@ -15,15 +15,47 @@
 
 <body>
   <main class="main-container">
+
+    <!-- Navigation med logo, Namn & cta-button -->
     <nav class="navigation">
       <div class="logo">
         <img src="../img/inteMinBild.png" alt="doge" width="120" height="100" class="doge">
         <h1 class="top">All Dogs Go 2 Heaven</h1>
-        <input type="button" name="knappen" class="cta-knappen" value="Become a Member">
+        <input type="button" name="knappen" class="cta-knappen" value="Become a Member" data-bs-toggle="modal"
+          data-bs-target="#exampleModal">
       </div>
     </nav>
-
-    <!-- formulär med knapp som postar. funktion som lägger till article i flöde. -->
+    <!-- Modal åt cta-button - innehålles formulär för att bli medlem-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Who are you?</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="formular">
+              <label for="firstName">Namn:</label>
+              <input type="text" id="firstName" placeholder="T.ex Maximilian">
+              <label for="lastName">Efternamn:</label>
+              <input type="text" id="lastName" placeholder="Johansson">
+              <!-- Lägg upp Hundbild -->
+              <label>
+                <input id="consent" type="checkbox">
+                Jag samtycker till att min info sparas
+              </label>
+              <input id="send" type="submit" value="Skicka">
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Flödes Kolumnen -->
+    <!-- formulär med knapp som postar. funktion som lägger till artiklar i flödet. -->
     <section class="flow-column">
       <article class="post-2flow inlagg-top">
         <form id="formularet">
@@ -31,7 +63,6 @@
           <input type="submit" id="post-publishing" value="Publicera">
         </form>
       </article>
-      <!-- lägg space mellan artiklar -->
       <article class="inlagg">
         <i class="fa fa-user fa-2x"></i>
         <h5 class="post-name">John Doe</h5>
@@ -86,7 +117,7 @@
 
     </div> -->
 
-
+    <!-- ATT-GÖRA: Skapa en Footer -->
   </main>
 
   <script src="app.js"></script>

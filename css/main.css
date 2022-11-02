@@ -3,7 +3,8 @@
 2. Navigation
 3. Navigation Logo
 4. Navigation CTA
-5. Flow-column
+5. Modal + Formulär
+6. Flow-column
 */
 
 :root {
@@ -32,6 +33,7 @@ body {
   position: relative;
 }
 
+/* Navigation */
 .navigation {
   width: 100vw;
   background-color: var(--nav-blue);
@@ -42,6 +44,7 @@ body {
   z-index: 5;
 }
 
+/* Navigation Logo */
 .logo {
   background-color: var(--nav-blue);
   display: flex;
@@ -82,6 +85,11 @@ body {
   cursor: pointer;
 }
 
+/* Modal + Formulär */
+#formular {
+  display: flex;
+  flex-direction: column;
+}
 
 /* Dessa Hund-Selectors finns ej på HTML ATM. UNDER */
 .dog-container {
