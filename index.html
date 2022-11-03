@@ -34,7 +34,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form id="formular">
+            <form id="medlem-formular" action="profil.html">
               <!-- action="profil.html" i <form> tar en till andra sidan. Makes sense. Ops funkar ej med event.preventDefault() -->
               <label for="firstName">Namn:</label>
               <input type="text" id="firstName" placeholder="T.ex Maximilian">
@@ -43,14 +43,15 @@
               <!-- Lägg upp Hundbild -->
               <label>
                 <input id="consent" type="checkbox">
-                Jag samtycker till att min info sparas
+                Vill du ha denna hund som profilbild?
               </label>
-              <input id="send" type="submit" value="Skicka">
+              <!-- <input id="send" type="submit" value="Skicka"> -->
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <input id="send" type="submit" form="medlem-formular" value="Save changes" class="btn btn-primary">
+            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
           </div>
         </div>
       </div>
@@ -59,7 +60,7 @@
     <!-- formulär med knapp som postar. funktion som lägger till artiklar i flödet. -->
     <section class="flow-column">
       <article class="post-2flow inlagg-top">
-        <form id="formularet">
+        <form id="post-formularet">
           <input type="text" id="post-typing" placeholder="   What's going on?">
           <input type="submit" id="post-publishing" value="Publicera">
         </form>

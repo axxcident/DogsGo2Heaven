@@ -1,0 +1,30 @@
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Who are you?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formular">
+          <!-- action="profil.html" i <form> tar en till andra sidan. Makes sense. Ops funkar ej med event.preventDefault() -->
+          <label for="firstName">Namn:</label>
+          <input type="text" id="firstName" placeholder="T.ex Maximilian">
+          <label for="lastName">Efternamn:</label>
+          <input type="text" id="lastName" placeholder="Johansson">
+          <!-- Lägg upp Hundbild -->
+          <label>
+            <input id="consent" type="checkbox">
+            Jag samtycker till att min info sparas
+          </label>
+          <input id="send" type="submit" value="Skicka">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

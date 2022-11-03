@@ -1,7 +1,7 @@
 // ATT GÖRA: lägg till beskrivning på allt
 
 // Kod för att publicera inlägg:
-const formular = document.getElementById("formularet");
+const formular = document.getElementById("post-formularet");
 const pubKnappen = document.getElementById("post-publishing");
 // const textfalt = document.getElementById("post-typing");
 const flowet = document.querySelector("body > main > section");
@@ -48,7 +48,25 @@ dummyTexts.forEach(kul => {
   kul = getJoke(kul);
 });
 
+// Formulär -koden. Become a member:
+let formen = document.getElementById("medlem-formular");
+let FnamnInfo = document.getElementById("firstName");
+let EnamnInfo = document.getElementById("lastName");
 
+//knsk ta bort.
+let mottagaren = document.getElementById("form-tagaren");
+
+formen.addEventListener('submit', () => {
+  // event.preventDefault();
+  //Lagra data - tidigare sessionStorage
+  localStorage.setItem('info', JSON.stringify({ firstName: `${FnamnInfo.value}`, lastName: `${EnamnInfo.value}` }))
+
+  //Hämta data
+  let datan = JSON.parse(localStorage.getItem('info'));
+
+  //Visa data
+  mottagaren.innerText = `Hej du måste vara ${datan.firstName} ${datan.lastName}`
+});
 
 
 // HÄMTA HUNBDBILDER
