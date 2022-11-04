@@ -80,7 +80,7 @@ if (datan !== null) {
   mottagaren.innerText = ''
 }
 
-// Lagra/Hämta/Visa data från formulär.
+// Lagra/Hämta/Visa data från formulär. KNSK TA BORT HÄMTA AVSNITT
 formen.addEventListener('submit', () => {
   // event.preventDefault();
   //Lagra data
