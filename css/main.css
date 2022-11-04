@@ -86,24 +86,13 @@ body {
 }
 
 /* Modal + Formulär */
-#formular {
+.modal-content {
+  width: 700px;
+}
+
+#medlem-formular {
   display: flex;
   flex-direction: column;
-}
-
-/* Dessa Hund-Selectors finns ej på HTML ATM. UNDER */
-.dog-container {
-  display: flex;
-  margin: 40px auto 30px;
-}
-
-.cont-img {
-  display: flex;
-  flex-direction: column;
-}
-
-.dog-container img {
-  margin: 105px auto 30px;
 }
 
 /* Sätt maximal och minimal storlek. max-width + flex ? */
@@ -111,12 +100,17 @@ body {
 /* Finns en variabel som hoppar mellan minsta, preferabla och högsta */
 #dogHome {
   border-radius: 10px;
-  max-width: 720px;
-  max-height: 500px;
+  max-width: 360px;
+  max-height: 250px;
   background-color: var(--BG-blue);
 }
 
-/* Dessa Hund-Selectors finns ej på HTML ATM. OVAN */
+#dogprofile {
+  border-radius: 10px;
+  max-width: 360px;
+  max-height: 250px;
+  background-color: var(--BG-blue);
+}
 
 /* Flödes- kolumnen  flow-column*/
 

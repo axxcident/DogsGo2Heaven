@@ -22,9 +22,9 @@ formular.addEventListener("submit", event => {
     ${textfalt}
   </p>
   `;
-  // markera överst
+  // markerar översta noden m QS.
   let toppen = document.querySelector("body > main > section > article:nth-child(2)");
-  // släng in nytt inlägg
+  // Slänger in nytt inlägg.
   flowet.insertBefore(nyArtikel, toppen);
 });
 
@@ -42,49 +42,61 @@ const getJoke = async function (Noden) {
   Noden.innerHTML = jokeObj.joke;
 }
 
-// KOLLA UPP. set intervall synkront.
-// call:a fetch-funktionen per loop-item i en for-loop.
 dummyTexts.forEach(kul => {
   kul = getJoke(kul);
 });
+
+// Hämta Hundbild
+let hundelement = document.querySelector('#dogHome');
+// Fetching image or gif.
+fetch('https://random.dog/woof.json')
+  .then(responsen => responsen.json())
+  .then(result => {
+    sessionStorage.setItem('dogpicture', JSON.stringify(result.url));
+  });
+
+let hundbilden = JSON.parse(sessionStorage.getItem('dogpicture'));
+hundelement.setAttribute('src', hundbilden);
 
 // Formulär -koden. Become a member:
 let formen = document.getElementById("medlem-formular");
 let FnamnInfo = document.getElementById("firstName");
 let EnamnInfo = document.getElementById("lastName");
+let konsent = document.getElementById("consent");
+// +hundelement
 
-//Displaya bli medlem-inputs
+//Displaya bli medlem-inputs DENNA FÖR PROFIL-SIDAN.
 let mottagaren = document.getElementById("form-tagaren");
+let profilbild = document.getElementById("dogprofile");
 
 let datan = JSON.parse(sessionStorage.getItem('info'));
 console.log(datan);
 if (datan !== null) {
-  mottagaren.innerText = `Hej du måste vara ${datan.firstName} ${datan.lastName}`
+  mottagaren.innerText = `Hej du måste vara ${datan.firstName} ${datan.lastName}`;
+  profilbild.setAttribute("src", datan.profileDogPic)
+  // profilbild.style.backgroundImage = `url(${datan.profileDogPic})`;
+
 } else {
   mottagaren.innerText = ''
 }
 
+// Lagra/Hämta/Visa data från formulär.
 formen.addEventListener('submit', () => {
   // event.preventDefault();
-  //Lagra data - tidigare sessionStorage
-  sessionStorage.setItem('info', JSON.stringify({ firstName: `${FnamnInfo.value}`, lastName: `${EnamnInfo.value}` }))
+  //Lagra data
+  sessionStorage.setItem('info', JSON.stringify({
+    firstName: `${FnamnInfo.value}`,
+    lastName: `${EnamnInfo.value}`,
+    profileDogPic: `${hundbilden}`
+  }))
 
   //Hämta data
   let datan = JSON.parse(sessionStorage.getItem('info'));
 
   //Visa data
-  mottagaren.innerText = `Hej du måste vara ${datan.firstName} ${datan.lastName}`
+  // mottagaren.innerText = `Hej du måste vara ${datan.firstName} ${datan.lastName}`;
 });
 
-
-// HÄMTA HUNBDBILDER
-/* let hundelement = document.querySelector('#dogHome')
-// Fetching image or gif.
-fetch('https://random.dog/woof.json')
-  .then(response => response.json())
-  .then(result => {
-    hundelement.setAttribute('src', result.url)
-  }); */
 
 
 // Funktion för text. (och/eller url text) KNSK TA BORT DENNA FUNKTION
