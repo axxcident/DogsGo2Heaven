@@ -94,6 +94,10 @@ let profilbild = document.getElementById("dogprofile");
 let datan = JSON.parse(sessionStorage.getItem('info'));
 console.log("Har profildata laddats up? " + datan);
 if (datan !== null) {
+  // LÄGG TILL HÄR:
+  // - ta bort modal-knapp. style.dipslay = "none";
+  // - lägg till profil-knapp. Embedda profil-länk i knapp.
+  //
   mottagaren.innerText = `Hej du måste vara ${datan.firstName} ${datan.lastName}`;
   profilbild.setAttribute("src", datan.profileDogPic)
   // profilbild.style.backgroundImage = `url(${datan.profileDogPic})`;
@@ -109,7 +113,7 @@ refreshKnappen.addEventListener('click', () => {
   hundelement.setAttribute('src', hundbilden);
 })
 
-// lyssna efter att allt är ifyllt och kryssat.
+// lyssna efter att allt i <form> är ifyllt och kryssat.
 submitKnappen.disabled = true;
 
 konsent.addEventListener('input', event => {
@@ -146,37 +150,11 @@ EnamnInfo.addEventListener('input', event => {
   }
 })
 
-// Lagra data från formulär. KNSK TA BORT HÄMTA/VISA AVSNITTET
+// Lagra data från formulär.
 formen.addEventListener('submit', () => {
-  // event.preventDefault();
-  //Lagra data
   sessionStorage.setItem('info', JSON.stringify({
     firstName: `${FnamnInfo.value}`,
     lastName: `${EnamnInfo.value}`,
     profileDogPic: `${hundbilden}`
   }))
-
-  //Hämta data - behövs ej. Datan ligger på sessionStorage "info"
-  // let datan = JSON.parse(sessionStorage.getItem('info'));
-
-  //Visa data
-  // mottagaren.innerText = `Hej du måste vara ${datan.firstName} ${datan.lastName}`;
 });
-
-
-// Funktion för text. (och/eller url text) KNSK TA BORT DENNA FUNKTION
-/* function showMessage(meddelande) {
-  document.getElementById('randomDog').textContent = meddelande;
-}
-let inslag = "woof woof";
-showMessage(inslag); */
-
-// Reserv-fetch (FUNGERAR) för pappa-skämtsidan.
-/* fetch('https://icanhazdadjoke.com/', {
-  method: "GET",
-  headers: {
-    'Accept': 'application/json'
-  }
-})
-  .then(response => response.json())
-  .then(result => { console.log(result.joke) }); */
