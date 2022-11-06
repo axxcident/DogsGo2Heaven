@@ -1,0 +1,19 @@
+Från Ardit
+
+let check = function () {
+let name=textfield.value
+let hasError = name.length < 1 || consent.checked == false
+button.disabled = hasError
+errorDiv.style.display = hasError ? "block" : "none"
+
+  nameError.style.display = name.length < 1 ? "block" : "none"
+  consentError.style.display = consent.checked ? "none" : "block"
+}
+
+textfield.addEventListener('input', function() {
+  check()
+})
+
+consent.addEventListener('input', function() {
+  check()
+})

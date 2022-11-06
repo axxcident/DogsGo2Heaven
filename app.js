@@ -1,4 +1,5 @@
 // ATT GÖRA: lägg till beskrivning på allt
+// Gör numrerad lista.
 
 // Kod för att publicera inlägg:
 const formular = document.getElementById("post-formularet");
@@ -46,31 +47,52 @@ dummyTexts.forEach(kul => {
   kul = getJoke(kul);
 });
 
-// Hämta Hundbild
-let hundelement = document.querySelector('#dogHome');
+// Hämta Hundbild NR 1
+/* let hundelement = document.querySelector('#dogHome');
 // Fetching image or gif.
 fetch('https://random.dog/woof.json')
   .then(responsen => responsen.json())
   .then(result => {
     sessionStorage.setItem('dogpicture', JSON.stringify(result.url));
-  });
+  }); */
 
+// Hämta Hundbild-funktionen NR 2
+const getDog = function () {
+  fetch('https://random.dog/woof.json')
+    .then(dogResponse => dogResponse.json())
+    .then(dogResult => {
+      console.log("Är gif: " + !dogResult.url.includes("jpg"))
+      if (dogResult.url.includes("gif") || dogResult.url.includes("mp4")) {
+        getDog()
+      } else {
+        sessionStorage.setItem('dogpicture', JSON.stringify(dogResult.url));
+        console.log("Är bild: " + dogResult.url.includes("jpg"))
+      }
+    })
+}
+getDog();
+let hundelement = document.querySelector('#dogHome');
 let hundbilden = JSON.parse(sessionStorage.getItem('dogpicture'));
 hundelement.setAttribute('src', hundbilden);
+
 
 // Formulär -koden. Become a member:
 let formen = document.getElementById("medlem-formular");
 let FnamnInfo = document.getElementById("firstName");
 let EnamnInfo = document.getElementById("lastName");
 let konsent = document.getElementById("consent");
+let submitKnappen = document.getElementById("send");
+let refreshKnappen = document.getElementById("refresh");
 // +hundelement
 
 //Displaya bli medlem-inputs DENNA FÖR PROFIL-SIDAN.
 let mottagaren = document.getElementById("form-tagaren");
 let profilbild = document.getElementById("dogprofile");
 
+
+// Kollar ifall profildata finns. Kör på båda sidor.
 let datan = JSON.parse(sessionStorage.getItem('info'));
-console.log(datan);
+console.log("Har profildata laddats up? " + datan);
 if (datan !== null) {
   mottagaren.innerText = `Hej du måste vara ${datan.firstName} ${datan.lastName}`;
   profilbild.setAttribute("src", datan.profileDogPic)
@@ -80,7 +102,51 @@ if (datan !== null) {
   mottagaren.innerText = ''
 }
 
-// Lagra/Hämta/Visa data från formulär. KNSK TA BORT HÄMTA AVSNITT
+// REFRESH knappen.
+refreshKnappen.addEventListener('click', () => {
+  getDog();
+  hundbilden = JSON.parse(sessionStorage.getItem('dogpicture'));
+  hundelement.setAttribute('src', hundbilden);
+})
+
+// lyssna efter att allt är ifyllt och kryssat.
+submitKnappen.disabled = true;
+
+konsent.addEventListener('input', event => {
+  if (event.target.checked !== true) {
+    submitKnappen.disabled = true;
+  } else if (event.target.checked === true) {
+    if (FnamnInfo.value === "" || EnamnInfo.value === "") {
+      submitKnappen.disabled = true;
+    } else if (FnamnInfo.value !== "" && EnamnInfo.value !== "") {
+      submitKnappen.disabled = false;
+    }
+  }
+})
+FnamnInfo.addEventListener('input', event => {
+  if (event.target.value === "") {
+    submitKnappen.disabled = true;
+  } else if (event.target.value !== "") {
+    if (konsent.checked === false || EnamnInfo.value === "") {
+      submitKnappen.disabled = true;
+    } else if (konsent.checked === true && EnamnInfo.value !== "") {
+      submitKnappen.disabled = false;
+    }
+  }
+})
+EnamnInfo.addEventListener('input', event => {
+  if (event.target.value === "") {
+    submitKnappen.disabled = true;
+  } else if (event.target.value !== "") {
+    if (FnamnInfo.value === "" || konsent.checked === false) {
+      submitKnappen.disabled = true;
+    } else if (FnamnInfo.value !== "" && konsent.checked === true) {
+      submitKnappen.disabled = false;
+    }
+  }
+})
+
+// Lagra data från formulär. KNSK TA BORT HÄMTA/VISA AVSNITTET
 formen.addEventListener('submit', () => {
   // event.preventDefault();
   //Lagra data
@@ -90,13 +156,12 @@ formen.addEventListener('submit', () => {
     profileDogPic: `${hundbilden}`
   }))
 
-  //Hämta data
-  let datan = JSON.parse(sessionStorage.getItem('info'));
+  //Hämta data - behövs ej. Datan ligger på sessionStorage "info"
+  // let datan = JSON.parse(sessionStorage.getItem('info'));
 
   //Visa data
   // mottagaren.innerText = `Hej du måste vara ${datan.firstName} ${datan.lastName}`;
 });
-
 
 
 // Funktion för text. (och/eller url text) KNSK TA BORT DENNA FUNKTION
