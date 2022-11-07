@@ -84,6 +84,9 @@ let konsent = document.getElementById("consent");
 let submitKnappen = document.getElementById("send");
 let refreshKnappen = document.getElementById("refresh");
 // +hundelement
+// profilknappen på båda sidor. Ska byta ut CTA-knappen.
+let profileLink = document.getElementById("profilelink");
+let ctaKnappen = document.querySelector(".cta-knappen");
 
 //Displaya bli medlem-inputs DENNA FÖR PROFIL-SIDAN.
 let mottagaren = document.getElementById("form-tagaren");
@@ -94,10 +97,11 @@ let profilbild = document.getElementById("dogprofile");
 let datan = JSON.parse(sessionStorage.getItem('info'));
 console.log("Har profildata laddats up? " + datan);
 if (datan !== null) {
-  // LÄGG TILL HÄR:
-  // - ta bort modal-knapp. style.dipslay = "none";
-  // - lägg till profil-knapp. Embedda profil-länk i knapp.
-  //
+  profileLink.style.display = "flex";
+  profileLink.setAttribute("src", datan.profileDogPic)
+  ctaKnappen.style.display = "none";
+
+
   mottagaren.innerText = `Hej du måste vara ${datan.firstName} ${datan.lastName}`;
   profilbild.setAttribute("src", datan.profileDogPic)
   // profilbild.style.backgroundImage = `url(${datan.profileDogPic})`;
