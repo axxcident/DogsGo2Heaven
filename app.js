@@ -157,9 +157,7 @@ EnamnInfo.addEventListener('input', event => {
 })
 
 // Lagra data från formulär. lägg upp data i Cities.
-formen.addEventListener('submit', (e) => {
-  console.log(e)
-  console.log("och hit?")
+formen.addEventListener('submit', () => {
   sessionStorage.setItem('info', JSON.stringify({
     firstName: `${FnamnInfo.value}`,
     lastName: `${EnamnInfo.value}`,
@@ -170,6 +168,27 @@ formen.addEventListener('submit', (e) => {
 });
 
 // Lägg stad och nummer i cities
+const cityPoster = function () {
+  console.log("körs denna funktion? får vi värden i cities?");
+  let hemstaden = JSON.parse(sessionStorage.getItem('info')).hometown;
+  let antalhund = JSON.parse(sessionStorage.getItem('info')).nrofdogs;
+  console.log(`Finns Hometown? ${hemstaden}`);
+  console.log(`Finns antalhund? ${antalhund}`);
+
+  fetch('https://avancera.app/cities/', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ name: `${hemstaden}`, population: Number(`${antalhund}`) })
+  })
+}
+
+formen.addEventListener("click", cityPoster())
+
+
+
+
 /* fetch('https://avancera.app/cities/', {
   // när vi skickar data till server så måste metod nämnas.
   method: 'POST',

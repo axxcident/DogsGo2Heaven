@@ -39,8 +39,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <!-- action="profil.html" -->
-            <form id="medlem-formular">
+            <form id="medlem-formular" action="profil.html">
               <!-- action="profil.html" i <form> tar en till andra sidan. Makes sense. Ops funkar ej med event.preventDefault() -->
               <label for="firstName">Namn:</label>
               <input type="text" id="firstName" placeholder="T.ex Maximilian">
@@ -59,8 +58,8 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" form="medlem-formular" id="send" class="btn btn-primary">Spara profil</button>
-            <!-- <input id="send" type="submit" form="medlem-formular" value="Spara profil" class="btn btn-primary"> -->
+            <!-- <button type="submit" form="medlem-formular" id="send" class="btn btn-primary"> Spara profil</button> -->
+            <input id="send" type="submit" form="medlem-formular" value="Spara profil" class="btn btn-primary">
             <input id="refresh" type="button" value="Generera ny hundbild" class="btn btn-primary">
           </div>
         </div>
