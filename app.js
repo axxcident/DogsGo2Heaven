@@ -47,16 +47,7 @@ dummyTexts.forEach(kul => {
   kul = getJoke(kul);
 });
 
-// Hämta Hundbild NR 1
-/* let hundelement = document.querySelector('#dogHome');
-// Fetching image or gif.
-fetch('https://random.dog/woof.json')
-  .then(responsen => responsen.json())
-  .then(result => {
-    sessionStorage.setItem('dogpicture', JSON.stringify(result.url));
-  }); */
-
-// Hämta Hundbild-funktionen NR 2
+// Hämta Hundbild-funktionen
 const getDog = function () {
   fetch('https://random.dog/woof.json')
     .then(dogResponse => dogResponse.json())
@@ -185,18 +176,3 @@ const cityPoster = function () {
 }
 
 formen.addEventListener("click", cityPoster())
-
-
-
-
-/* fetch('https://avancera.app/cities/', {
-  // när vi skickar data till server så måste metod nämnas.
-  method: 'POST',
-  // måste ha Header med som försklarar filtyp.
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  // måste ha med body som matchar nyklar som finns på servern.
-  // JSON.stringify konverterar
-  body: JSON.stringify({ "name": `${homeTown.value}`, "population": `${Number(nrOfDogs.value)}` })
-}) */
