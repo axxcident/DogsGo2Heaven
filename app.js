@@ -80,7 +80,9 @@ hundelement.setAttribute('src', hundbilden);
 let formen = document.getElementById("medlem-formular");
 let FnamnInfo = document.getElementById("firstName");
 let EnamnInfo = document.getElementById("lastName");
-let konsent = document.getElementById("consent");
+let konsent = document.getElementById("consent"); // funkar ihop med andra inputs i formuläret.
+let homeTown = document.getElementById("hometown");
+let nrOfDogs = document.getElementById("nrofdogs");
 let submitKnappen = document.getElementById("send");
 let refreshKnappen = document.getElementById("refresh");
 // +hundelement
@@ -102,7 +104,7 @@ if (datan !== null) {
   ctaKnappen.style.display = "none";
 
 
-  mottagaren.innerText = `Hej du måste vara ${datan.firstName} ${datan.lastName}`;
+  mottagaren.innerText = `Hej du måste vara ${datan.firstName} ${datan.lastName} och bo i ${datan.hometown} samt ha ${datan.nrofdogs} hundar`;
   profilbild.setAttribute("src", datan.profileDogPic)
   // profilbild.style.backgroundImage = `url(${datan.profileDogPic})`;
 
@@ -117,7 +119,7 @@ refreshKnappen.addEventListener('click', () => {
   hundelement.setAttribute('src', hundbilden);
 })
 
-// lyssna efter att allt i <form> är ifyllt och kryssat.
+// lyssna efter att allt i <form> är ifyllt och kryssat. Kan utökas.
 submitKnappen.disabled = true;
 
 konsent.addEventListener('input', event => {
@@ -154,11 +156,28 @@ EnamnInfo.addEventListener('input', event => {
   }
 })
 
-// Lagra data från formulär.
-formen.addEventListener('submit', () => {
+// Lagra data från formulär. lägg upp data i Cities.
+formen.addEventListener('submit', (e) => {
+  console.log(e)
+  console.log("och hit?")
   sessionStorage.setItem('info', JSON.stringify({
     firstName: `${FnamnInfo.value}`,
     lastName: `${EnamnInfo.value}`,
+    hometown: `${homeTown.value}`,
+    nrofdogs: `${nrOfDogs.value}`,
     profileDogPic: `${hundbilden}`
   }))
 });
+
+// Lägg stad och nummer i cities
+/* fetch('https://avancera.app/cities/', {
+  // när vi skickar data till server så måste metod nämnas.
+  method: 'POST',
+  // måste ha Header med som försklarar filtyp.
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  // måste ha med body som matchar nyklar som finns på servern.
+  // JSON.stringify konverterar
+  body: JSON.stringify({ "name": `${homeTown.value}`, "population": `${Number(nrOfDogs.value)}` })
+}) */
