@@ -155,6 +155,13 @@ body {
   cursor: pointer;
 }
 
+.user-inlagg {
+  border-radius: 10px;
+  grid-row: 1/5;
+  display: flex;
+  justify-self: center;
+}
+
 .inlagg-top {
   margin: 10px auto 25px;
 }
@@ -168,11 +175,18 @@ body {
   grid-template-rows: repeat(2, 1fr);
 }
 
-.fa-user {
+.npc-user {
+  border-radius: 10px;
   grid-row: 1/5;
   display: flex;
   justify-self: center;
 }
+
+/* .fa-user {
+  grid-row: 1/5;
+  display: flex;
+  justify-self: center;
+} */
 
 .inlagg .post-name {
   grid-column: 2/6;

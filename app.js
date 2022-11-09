@@ -7,7 +7,7 @@ const pubKnappen = document.getElementById("post-publishing");
 // const textfalt = document.getElementById("post-typing");
 const flowet = document.querySelector("body > main > section");
 
-if (JSON.parse(sessionStorage.getItem('mypost')) !== undefined) {
+if (JSON.parse(sessionStorage.getItem('mypost')) !== null) {
   var textfalt = JSON.parse(sessionStorage.getItem('mypost'));
   let nyArtikel = document.createElement('article');
   nyArtikel.setAttribute("class", "inlagg");
@@ -24,6 +24,7 @@ if (JSON.parse(sessionStorage.getItem('mypost')) !== undefined) {
   flowet.insertBefore(nyArtikel, toppen);
 }
 
+let datan = JSON.parse(sessionStorage.getItem('info'));
 // när man klickar på knapp ska formulär-noden köra detta.
 formular.addEventListener("submit", event => {
   // Hindrar sidan från att ladda om. KNSK ta bort och göra AEL knapp så att inläggstext försvinner.
@@ -33,13 +34,25 @@ formular.addEventListener("submit", event => {
   // Skapa nytt inlägg
   let nyArtikel = document.createElement('article');
   nyArtikel.setAttribute("class", "inlagg");
-  nyArtikel.innerHTML = `
-  <i class="fa fa-user fa-2x"></i>
-  <h5 class="post-name">John Doe</h5>
-  <p class="post-text">
-    ${textfalt}
-  </p>
-  `;
+  // skapa inlägg beroende på om sessionStorage "info" har skapats elr ej.
+  if (datan !== null) {
+    let userBild = datan.profileDogPic;
+    nyArtikel.innerHTML = `
+    <img class="user-inlagg" src="${userBild}" alt="non-playable character" width="50" height="50">
+    <h5 class="post-name">John Doe</h5>
+    <p class="post-text">
+      ${textfalt}
+    </p>
+    `;
+  } else {
+    nyArtikel.innerHTML = `
+    <img class="npc-user" src="img/npc.png" alt="non-playable character" width="50" height="50">
+    <h5 class="post-name">John Doe</h5>
+    <p class="post-text">
+      ${textfalt}
+    </p>
+    `;
+  }
   // markerar översta noden m QS.
   let toppen = document.querySelector("body > main > section > article:nth-child(2)");
   // Slänger in nytt inlägg.
@@ -48,6 +61,8 @@ formular.addEventListener("submit", event => {
   //lägg upp på Session för att spara inlägg.
   sessionStorage.setItem('mypost', JSON.stringify(textfalt));
 });
+
+// ändra till user-inlagg
 
 
 // Selecta <p> för funktionen.
@@ -103,12 +118,13 @@ let profileLink = document.getElementById("profilelink");
 let ctaKnappen = document.querySelector(".cta-knappen");
 
 //Displaya bli medlem-inputs DENNA FÖR PROFIL-SIDAN.
+// knsk strax överflödig. Kolla dessa noder.
 let mottagaren = document.getElementById("form-tagaren");
 let profilbild = document.getElementById("dogprofile");
 
 
 // Kollar ifall profildata finns. Kör på båda sidor.
-let datan = JSON.parse(sessionStorage.getItem('info'));
+// let datan = JSON.parse(sessionStorage.getItem('info')); Har flyttat upp denna.
 console.log("Har profildata laddats up? " + datan);
 if (datan !== null) {
   profileLink.style.display = "flex";
