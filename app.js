@@ -7,27 +7,59 @@ const pubKnappen = document.getElementById("post-publishing");
 // const textfalt = document.getElementById("post-typing");
 const flowet = document.querySelector("body > main > section");
 
-if (JSON.parse(sessionStorage.getItem('mypost')) !== null) {
-  var textfalt = JSON.parse(sessionStorage.getItem('mypost'));
-  let nyArtikel = document.createElement('article');
-  nyArtikel.setAttribute("class", "inlagg");
-  nyArtikel.innerHTML += `
-  <i class="fa fa-user fa-2x"></i>
-  <h5 class="post-name">John Doe</h5>
-  <p class="post-text">
-    ${textfalt}
-  </p>
-  `;
-  // markerar översta noden m QS.
-  let toppen = document.querySelector("body > main > section > article:nth-child(2)");
-  // Slänger in nytt inlägg.
-  flowet.insertBefore(nyArtikel, toppen);
+// Funktion som kan spara flera inlägg[lista] i sessionStorage. Returnar oxå lista.
+let postList = function (textPost = null) {
+  let lista = [];
+  if (textPost !== null) {
+    if (JSON.parse(sessionStorage.getItem('mypost')) !== null && !Array.isArray(JSON.parse(sessionStorage.getItem('mypost')))) {
+      lista.push(textPost);
+      lista.push(JSON.parse(sessionStorage.getItem('mypost')));
+      sessionStorage.setItem('mypost', JSON.stringify(lista));
+    } else if (JSON.parse(sessionStorage.getItem('mypost')) !== null && Array.isArray(JSON.parse(sessionStorage.getItem('mypost')))) {
+      lista.push(textPost);
+      for (let i = 0; i < JSON.parse(sessionStorage.getItem('mypost')).length; i++) {
+        lista.push(JSON.parse(sessionStorage.getItem('mypost'))[i])
+      }
+      sessionStorage.setItem('mypost', JSON.stringify(lista));
+    } else {
+      sessionStorage.setItem('mypost', JSON.stringify(textPost));
+      lista.push(textPost);
+    }
+  }
+  // return lista;
 }
 
+// knsk uppdatera datan variabeln längre ner?
 let datan = JSON.parse(sessionStorage.getItem('info'));
-// när man klickar på knapp ska formulär-noden köra detta.
+
+// Kod för att visa tidigare inlägg. För användare.
+if (datan !== null && sessionStorage.getItem('mypost') !== null) {
+  let oldPosts = JSON.parse(sessionStorage.getItem('mypost'));
+  console.log(typeof oldPosts)
+  console.log(oldPosts)
+  let userBild = datan.profileDogPic;
+  let namnet = datan.firstName;
+  let efternamnet = datan.lastName;
+  // markerar översta noden m QS.
+  oldPosts.forEach(post => {
+    let nyArtikel = document.createElement('article');
+    nyArtikel.setAttribute("class", "inlagg");
+    let toppen = document.querySelector("body > main > section > article:nth-child(2)");
+    nyArtikel.innerHTML = `
+    <img class="user-inlagg" src="${userBild}" alt="user profile picture" width="50" height="50">
+    <h5 class="post-name">${namnet} ${efternamnet}</h5>
+    <p class="post-text">
+      ${post}
+    </p>
+    `;
+    flowet.insertBefore(nyArtikel, toppen);
+  })
+}
+
+
+// kod för att skriva inlägg i flödet. För användare eller ej.
 formular.addEventListener("submit", event => {
-  // Hindrar sidan från att ladda om. KNSK ta bort och göra AEL knapp så att inläggstext försvinner.
+  // Hindrar sidan från att ladda om.
   event.preventDefault();
   // Skapar String värde.
   let textfalt = document.getElementById("post-typing").value;
@@ -37,13 +69,17 @@ formular.addEventListener("submit", event => {
   // skapa inlägg beroende på om sessionStorage "info" har skapats elr ej.
   if (datan !== null) {
     let userBild = datan.profileDogPic;
+    let namnet = datan.firstName;
+    let efternamnet = datan.lastName;
     nyArtikel.innerHTML = `
-    <img class="user-inlagg" src="${userBild}" alt="non-playable character" width="50" height="50">
-    <h5 class="post-name">John Doe</h5>
+    <img class="user-inlagg" src="${userBild}" alt="user profile picture" width="50" height="50">
+    <h5 class="post-name">${namnet} ${efternamnet}</h5>
     <p class="post-text">
       ${textfalt}
     </p>
     `;
+    //lägg upp på Session för att spara inlägg ifall användare finns.
+    postList(textfalt);
   } else {
     nyArtikel.innerHTML = `
     <img class="npc-user" src="img/npc.png" alt="non-playable character" width="50" height="50">
@@ -55,14 +91,9 @@ formular.addEventListener("submit", event => {
   }
   // markerar översta noden m QS.
   let toppen = document.querySelector("body > main > section > article:nth-child(2)");
-  // Slänger in nytt inlägg.
+  // Slänger in nytt inlägg i flödet.
   flowet.insertBefore(nyArtikel, toppen);
-
-  //lägg upp på Session för att spara inlägg.
-  sessionStorage.setItem('mypost', JSON.stringify(textfalt));
 });
-
-// ändra till user-inlagg
 
 
 // Selecta <p> för funktionen.
@@ -201,6 +232,8 @@ formen.addEventListener('submit', () => {
     nrofdogs: `${nrOfDogs.value}`,
     profileDogPic: `${hundbilden}`
   }))
+  // Denna körs aldrig. be om hjälp.
+  cityPoster();
 });
 
 // Lägg stad och nummer i cities
@@ -220,4 +253,12 @@ const cityPoster = function () {
   })
 }
 
-formen.addEventListener("click", cityPoster())
+// själva knappen: submitKnappen
+// själva formuläret: formen
+
+formen.addEventListener("submit", cityPoster());
+
+// Funkar inte. Be om hjälp.
+// formen.addEventListener("submit", () => {   Funkar inte
+//   cityPoster();
+// })
