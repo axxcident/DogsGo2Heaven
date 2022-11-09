@@ -154,30 +154,27 @@ let mottagaren = document.getElementById("form-tagaren");
 let profilbild = document.getElementById("dogprofile");
 
 
-// Kollar ifall profildata finns. Kör på båda sidor.
-// let datan = JSON.parse(sessionStorage.getItem('info')); Har flyttat upp denna.
+// Kollar ifall profildata finns. lägger upp profilknapp.
+// lägger också upp profildata ifall man är på profilsidan. lägg till antal inlägg?
 console.log("Har profildata laddats up? " + datan);
 if (datan !== null) {
   profileLink.style.display = "flex";
   profileLink.setAttribute("src", datan.profileDogPic)
   ctaKnappen.style.display = "none";
 
-  mottagaren.innerText = `
+  mottagaren.innerHTML = `
   <dl>
     <dt>Namn:</dt>
-    <dd>${datan.firstName} ${datan.lastName}</dd>
+    <dd>${datan.firstName} ${datan.lastName} <input type="submit" value="Ändra"></dd>
     <dt>Hemstad:</dt>
-    <dd>${datan.hometown}</dd>
+    <dd>${datan.hometown} <input type="submit" value="Ändra"></dd>
     <dt>Owner of x dogs:</dt>
-    <dd>${datan.nrofdogs}</dd>
+    <dd>${datan.nrofdogs} <input type="submit" value="Ändra"></dd>
   </dl>
   `
 } else {
-  mottagaren.innerText = ''
+  mottagaren.innerHTML = ''
 }
-// Hej du måste vara ${datan.firstName} ${datan.lastName} och bo i ${datan.hometown} samt ha ${datan.nrofdogs} hundar`;
-// profilbild.setAttribute("src", datan.profileDogPic)
-// // profilbild.style.backgroundImage = `url(${datan.profileDogPic});
 
 // REFRESH knappen.
 refreshKnappen.addEventListener('click', () => {
@@ -256,7 +253,7 @@ const cityPoster = function () {
 // själva knappen: submitKnappen
 // själva formuläret: formen
 
-formen.addEventListener("submit", cityPoster());
+// formen.addEventListener("submit", cityPoster());
 
 // Funkar inte. Be om hjälp.
 // formen.addEventListener("submit", () => {   Funkar inte
