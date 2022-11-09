@@ -220,6 +220,25 @@ EnamnInfo.addEventListener('input', event => {
   }
 })
 
+
+
+// onsubmit test funkade ej
+/* const myFunction = function () {
+  sessionStorage.setItem('info', JSON.stringify({
+    firstName: `${FnamnInfo.value}`,
+    lastName: `${EnamnInfo.value}`,
+    hometown: `${homeTown.value}`,
+    nrofdogs: `${nrOfDogs.value}`,
+    profileDogPic: `${hundbilden}`
+  }))
+  console.log("körs cityPoster? om denna syns, ja!")
+  cityPoster();
+} */
+
+// själva knappen: submitKnappen
+// själva formuläret: formen
+// formen.addEventListener('click', () => {
+
 // Lagra data från formulär. lägg upp data i Cities.
 formen.addEventListener('submit', () => {
   sessionStorage.setItem('info', JSON.stringify({
@@ -229,11 +248,12 @@ formen.addEventListener('submit', () => {
     nrofdogs: `${nrOfDogs.value}`,
     profileDogPic: `${hundbilden}`
   }))
-  // Denna körs aldrig. be om hjälp.
+  // Denna körs aldrig med "submit". be om hjälp.
+  console.log("körs cityPoster? om denna syns, ja!")
   cityPoster();
 });
 
-// Lägg stad och nummer i cities
+// Funktion som lägger stad och nummer i cities-tjänsten.
 const cityPoster = function () {
   console.log("körs denna funktion? får vi värden i cities?");
   let hemstaden = JSON.parse(sessionStorage.getItem('info')).hometown;
@@ -256,6 +276,6 @@ const cityPoster = function () {
 // formen.addEventListener("submit", cityPoster());
 
 // Funkar inte. Be om hjälp.
-// formen.addEventListener("submit", () => {   Funkar inte
+// formen.addEventListener("submit", () => {
 //   cityPoster();
 // })
