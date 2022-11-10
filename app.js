@@ -240,7 +240,7 @@ EnamnInfo.addEventListener('input', event => {
 // formen.addEventListener('click', () => {
 
 // Lagra data från formulär. lägg upp data i Cities.
-formen.addEventListener('submit', () => {
+/* formen.addEventListener('submit', event => {
   sessionStorage.setItem('info', JSON.stringify({
     firstName: `${FnamnInfo.value}`,
     lastName: `${EnamnInfo.value}`,
@@ -248,26 +248,51 @@ formen.addEventListener('submit', () => {
     nrofdogs: `${nrOfDogs.value}`,
     profileDogPic: `${hundbilden}`
   }))
+  // event.preventDefault();
+  // let cityStad = homeTown.value;
+  // let cityNum = nrOfDogs.value;
+
+  // fetch('https://avancera.app/cities/', {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json"
+  //   },
+  //   body: JSON.stringify({ name: `${cityStad}`, population: Number(`${cityNum}`) })
+  // })
+
   // Denna körs aldrig med "submit". be om hjälp.
-  console.log("körs cityPoster? om denna syns, ja!")
-  cityPoster();
-});
+  // console.log("körs cityPoster? om denna syns, ja!")
+  // cityPoster();
+}); */
 
 // Funktion som lägger stad och nummer i cities-tjänsten.
-const cityPoster = function () {
-  console.log("körs denna funktion? får vi värden i cities?");
-  let hemstaden = JSON.parse(sessionStorage.getItem('info')).hometown;
-  let antalhund = JSON.parse(sessionStorage.getItem('info')).nrofdogs;
-  console.log(`Finns Hometown? ${hemstaden}`);
-  console.log(`Finns antalhund? ${antalhund}`);
+function cityPoster() {
+  console.log("TITTA HIT, cityposter körs");
+
+  sessionStorage.setItem('info', JSON.stringify({
+    firstName: `${FnamnInfo.value}`,
+    lastName: `${EnamnInfo.value}`,
+    hometown: `${homeTown.value}`,
+    nrofdogs: `${nrOfDogs.value}`,
+    profileDogPic: `${hundbilden}`
+  }))
+  // let hemstaden = JSON.parse(sessionStorage.getItem('info')).hometown;
+  // let antalhund = JSON.parse(sessionStorage.getItem('info')).nrofdogs;
+  // console.log(`Finns Hometown? ${hemstaden}`);
+  // console.log(`Finns antalhund? ${antalhund}`);
+  let cityStad = homeTown.value;
+  let cityNum = nrOfDogs.value;
 
   fetch('https://avancera.app/cities/', {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ name: `${hemstaden}`, population: Number(`${antalhund}`) })
-  })
+    body: JSON.stringify({ name: `${cityStad}`, population: Number(`${cityNum}`) })
+  }).then(response => console.log(response))
+
+  setInterval(document.location.reload(), 6000);
+
 }
 
 // själva knappen: submitKnappen
