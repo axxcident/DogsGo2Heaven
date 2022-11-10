@@ -58,6 +58,19 @@ if (datan !== null && sessionStorage.getItem('mypost') !== null) {
   })
 }
 
+// Sparar användarID för inlägg i cities tjänsten.
+if (datan !== null) {
+  var IDet = "temporärt";
+  fetch('https://avancera.app/cities/', {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(response => response.json())
+    .then(data => IDet = data[data.length - 1].id);
+  console.log("IDet fetchen har körts.")
+  console.log(typeof IDet + IDet)
+}
 
 // kod för att skriva inlägg i flödet. För användare eller ej.
 formular.addEventListener("submit", event => {
@@ -212,39 +225,38 @@ editLastN.addEventListener("click", () => {
   setInterval(document.location.reload(), 3000);
 })
 editHem.addEventListener("click", () => {
-  let IDet;
-  fetch('https://avancera.app/cities/', {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json"
-    }
-  }).then(response => response.json())
-    .then(data => IDet = data[data.length - 1].id);
-
   let nytt = prompt("Vart bor du?");
   console.log(IDet);
   update({ hometown: nytt });
 
-  /*   fetch('https://avancera.app/cities/', { Fixa med ASYNC AWAIT ovan.
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ name: `${cityStad}`, population: Number(`${cityNum}`) })
-    }).then(response => {
-      if (response.status == 201) {
-        setInterval(document.location.reload(), 6000)
-      }
-    }) */
-  // setInterval(document.location.reload(), 3000);
+  fetch(`https://avancera.app/cities/${IDet}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      name: `${nytt}`,
+      population: Number(`${datan.nrofdogs}`),
+      id: `${IDet}`
+    })
+  }).then(response => {
+    if (response.status == 201) {
+      alert("vi har fått signal")
+      document.location.reload()
+    }
+  })
 })
+
+// ATT LÖSA: Kod ovan laddar inte om sidan men funkar annars.
+// lösning. Lägg en asyn funktion som gör fetch-PUT. låt knapp köra metod & uppdatera sidan.
+
 editNrDogs.addEventListener("click", () => {
   let nytt = Number(prompt("Hur många hundar har du egentligen?"));
   update({ nrofdogs: nytt });
   setInterval(document.location.reload(), 3000);
 })
 
-// Denna ska knsk bort.
+// Lånade denna förstår dock inte 100% koden.
 // https://stackoverflow.com/questions/54460512/update-value-on-sessionstorage-object
 function update(value) {
   let prevData = JSON.parse(sessionStorage.getItem('info'));
