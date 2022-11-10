@@ -201,9 +201,67 @@ let editHem = document.getElementById("editHome");
 let editNrDogs = document.getElementById("editNrDogs");
 
 // AEL för Edit knapparna
-/* editNamn.addEventListener("click", => {
+editNamn.addEventListener("click", () => {
+  let nytt = prompt("Vad heter du?");
+  update({ firstName: nytt });
+  setInterval(document.location.reload(), 3000);
+})
+editLastN.addEventListener("click", () => {
+  let nytt = prompt("Vad är ditt efternamn?");
+  update({ lastName: nytt });
+  setInterval(document.location.reload(), 3000);
+})
+editHem.addEventListener("click", () => {
+  let IDet;
+  fetch('https://avancera.app/cities/', {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(response => response.json())
+    .then(data => IDet = data[data.length - 1].id);
 
-}) */
+  let nytt = prompt("Vart bor du?");
+  console.log(IDet);
+  update({ hometown: nytt });
+
+  /*   fetch('https://avancera.app/cities/', { Fixa med ASYNC AWAIT ovan.
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ name: `${cityStad}`, population: Number(`${cityNum}`) })
+    }).then(response => {
+      if (response.status == 201) {
+        setInterval(document.location.reload(), 6000)
+      }
+    }) */
+  // setInterval(document.location.reload(), 3000);
+})
+editNrDogs.addEventListener("click", () => {
+  let nytt = Number(prompt("Hur många hundar har du egentligen?"));
+  update({ nrofdogs: nytt });
+  setInterval(document.location.reload(), 3000);
+})
+
+// Denna ska knsk bort.
+// https://stackoverflow.com/questions/54460512/update-value-on-sessionstorage-object
+function update(value) {
+  let prevData = JSON.parse(sessionStorage.getItem('info'));
+  Object.keys(value).forEach(function (val, key) {
+    prevData[val] = value[val];
+  })
+  sessionStorage.setItem('info', JSON.stringify(prevData));
+}
+
+
+/*   sessionStorage.setItem('info', JSON.stringify({
+    firstName: `${FnamnInfo.value}`,
+    lastName: `${EnamnInfo.value}`,
+    hometown: `${homeTown.value}`,
+    nrofdogs: `${nrOfDogs.value}`,
+    profileDogPic: `${hundbilden}`
+  })) */
 
 
 // REFRESH knappen.
