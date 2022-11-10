@@ -17,3 +17,49 @@ textfield.addEventListener('input', function() {
 consent.addEventListener('input', function() {
   check()
 })
+
+
+
+) })
+  }).then(response => console.log(response))
+  .then(res =>
+    if(res.ok == 201) {
+      setInterval(document.location.reload(), 6000);
+    }
+    else {
+
+    })
+
+
+
+// Funktion som lägger stad och nummer i cities-tjänsten.
+async function cityPoster() {
+  console.log("TITTA HIT, cityposter körs");
+
+  sessionStorage.setItem('info', JSON.stringify({
+    firstName: `${FnamnInfo.value}`,
+    lastName: `${EnamnInfo.value}`,
+    hometown: `${homeTown.value}`,
+    nrofdogs: `${nrOfDogs.value}`,
+    profileDogPic: `${hundbilden}`
+  }))
+  let cityStad = homeTown.value;
+  let cityNum = nrOfDogs.value;
+
+  await fetch('https://avancera.app/cities/', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ name: `${cityStad}`, population: Number(`${cityNum}`) })
+  }).then(response => console.log(response))
+    .then(result => {
+      if (result.status == 201) {
+        setInterval(document.location.reload(), 6000)
+      }
+    })
+
+
+  // updatePage();
+  // setInterval(document.location.reload(), 6000);
+}

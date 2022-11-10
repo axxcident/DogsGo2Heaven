@@ -1,6 +1,8 @@
 // ATT GÖRA: lägg till beskrivning på allt
 // Gör numrerad lista.
 
+// queryselectorer ska vara högst upp enligt Rikardo
+
 // Kod för att publicera inlägg:
 const formular = document.getElementById("post-formularet");
 const pubKnappen = document.getElementById("post-publishing");
@@ -165,16 +167,44 @@ if (datan !== null) {
   mottagaren.innerHTML = `
   <dl>
     <dt>Namn:</dt>
-    <dd>${datan.firstName} ${datan.lastName} <input type="submit" value="Ändra"></dd>
+    <dd>${datan.firstName}<input type="button" id="editName" value="Ändra" class="btn btn-primary"></dd>
+    <dt>Efternamn:</dt>
+    <dd>${datan.lastName}<input type="button" id="editLastName" value="Ändra" class="btn btn-primary"></dd>
     <dt>Hemstad:</dt>
-    <dd>${datan.hometown} <input type="submit" value="Ändra"></dd>
+    <dd>${datan.hometown}<input type="button" id="editHome" value="Ändra" class="btn btn-primary"></dd>
     <dt>Owner of x dogs:</dt>
-    <dd>${datan.nrofdogs} <input type="submit" value="Ändra"></dd>
+    <dd>${datan.nrofdogs}<input type="button" id="editNrDogs" value="Ändra" class="btn btn-primary"></dd>
   </dl>
-  `
+  `;
+  let grej = document.querySelectorAll("#form-tagaren > dl > dd");
+  grej.forEach(dd => {
+    dd.style.display = "flex";
+  })
+  grej.forEach(dd => {
+    dd.style.justifyContent = "space-between"
+  })
+  grej.forEach(dd => {
+    dd.style.alignItems = "center"
+  })
+  grej.forEach(dd => {
+    dd.style.padding = "4px"
+  })
+
 } else {
   mottagaren.innerHTML = ''
 }
+
+//Selecta Edit-knappar.
+let editNamn = document.getElementById("editName");
+let editLastN = document.getElementById("editLastName");
+let editHem = document.getElementById("editHome");
+let editNrDogs = document.getElementById("editNrDogs");
+
+// AEL för Edit knapparna
+/* editNamn.addEventListener("click", => {
+
+}) */
+
 
 // REFRESH knappen.
 refreshKnappen.addEventListener('click', () => {
@@ -221,24 +251,6 @@ EnamnInfo.addEventListener('input', event => {
 })
 
 
-
-// onsubmit test funkade ej
-/* const myFunction = function () {
-  sessionStorage.setItem('info', JSON.stringify({
-    firstName: `${FnamnInfo.value}`,
-    lastName: `${EnamnInfo.value}`,
-    hometown: `${homeTown.value}`,
-    nrofdogs: `${nrOfDogs.value}`,
-    profileDogPic: `${hundbilden}`
-  }))
-  console.log("körs cityPoster? om denna syns, ja!")
-  cityPoster();
-} */
-
-// själva knappen: submitKnappen
-// själva formuläret: formen
-// formen.addEventListener('click', () => {
-
 // Lagra data från formulär. lägg upp data i Cities.
 /* formen.addEventListener('submit', event => {
   sessionStorage.setItem('info', JSON.stringify({
@@ -248,7 +260,7 @@ EnamnInfo.addEventListener('input', event => {
     nrofdogs: `${nrOfDogs.value}`,
     profileDogPic: `${hundbilden}`
   }))
-  // event.preventDefault();
+  event.preventDefault();
   // let cityStad = homeTown.value;
   // let cityNum = nrOfDogs.value;
 
@@ -265,8 +277,19 @@ EnamnInfo.addEventListener('input', event => {
   // cityPoster();
 }); */
 
+// const getJoke = async function (Noden) {
+//   const jokeData = await fetch('https://icanhazdadjoke.com/', {
+//     headers: {
+//       "Accept": "application/json"
+//     }
+//   });
+//   const jokeObj = await jokeData.json();
+//   Noden.innerHTML = jokeObj.joke;
+// }
+
+
 // Funktion som lägger stad och nummer i cities-tjänsten.
-function cityPoster() {
+async function cityPoster() {
   console.log("TITTA HIT, cityposter körs");
 
   sessionStorage.setItem('info', JSON.stringify({
@@ -276,24 +299,26 @@ function cityPoster() {
     nrofdogs: `${nrOfDogs.value}`,
     profileDogPic: `${hundbilden}`
   }))
-  // let hemstaden = JSON.parse(sessionStorage.getItem('info')).hometown;
-  // let antalhund = JSON.parse(sessionStorage.getItem('info')).nrofdogs;
-  // console.log(`Finns Hometown? ${hemstaden}`);
-  // console.log(`Finns antalhund? ${antalhund}`);
   let cityStad = homeTown.value;
   let cityNum = nrOfDogs.value;
 
-  fetch('https://avancera.app/cities/', {
+  await fetch('https://avancera.app/cities/', {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({ name: `${cityStad}`, population: Number(`${cityNum}`) })
-  }).then(response => console.log(response))
-
-  setInterval(document.location.reload(), 6000);
-
+  }).then(response => {
+    if (response.status == 201) {
+      setInterval(document.location.reload(), 6000)
+    }
+  })
 }
+
+// updatePage();
+// const updatePage = function () {
+//   setInterval(document.location.reload(), 20000);
+// }
 
 // själva knappen: submitKnappen
 // själva formuläret: formen
