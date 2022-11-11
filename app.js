@@ -111,10 +111,10 @@ formular.addEventListener("submit", event => {
 });
 
 
-// Selecta <p> för funktionen.
+// Selecta <p>s för slumpskämt i flödet.
 let dummyTexts = document.querySelectorAll("#jokeText");
 
-// Funktion för att populatta Nod som heter jokeText.
+// Funktion & forEach loop som populattar fejk-inlägg m skämt från getJoke().
 const getJoke = async function (Noden) {
   const jokeData = await fetch('https://icanhazdadjoke.com/', {
     headers: {
@@ -124,10 +124,29 @@ const getJoke = async function (Noden) {
   const jokeObj = await jokeData.json();
   Noden.innerHTML = jokeObj.joke;
 }
-
 dummyTexts.forEach(kul => {
   kul = getJoke(kul);
 });
+
+// Selecta <h5>s för slumpnamn i flödet.
+let dummyNames = document.querySelectorAll("#fejknamn");
+
+// Funktion & forEach loop som populattar fejk-inlägg m fejk-namn.
+const getName = async function (Noden) {
+  const nameData = await fetch('https://randomuser.me/api/?inc=name', {
+    headers: {
+      "Accept": "application/json"
+    }
+  });
+  const nameObj = await nameData.json();
+  Noden.innerHTML = nameObj.results[0].name.first;
+  Noden.innerHTML += " ";
+  Noden.innerHTML += nameObj.results[0].name.last;
+}
+dummyNames.forEach(namn => {
+  namn = getName(namn);
+});
+
 
 // Hämta Hundbild-funktionen
 const getDog = function () {
