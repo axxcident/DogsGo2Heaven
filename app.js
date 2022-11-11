@@ -9,7 +9,7 @@ const pubKnappen = document.getElementById("post-publishing");
 // const textfalt = document.getElementById("post-typing");
 const flowet = document.querySelector("body > main > section");
 
-// Funktion som kan spara flera inlägg[lista] i sessionStorage. Returnar oxå lista.
+// Funktion som kan spara ett eller flera inlägg i sessionStorage.
 let postList = function (textPost = null) {
   let lista = [];
   if (textPost !== null) {
@@ -213,6 +213,35 @@ let editLastN = document.getElementById("editLastName");
 let editHem = document.getElementById("editHome");
 let editNrDogs = document.getElementById("editNrDogs");
 
+// funktion för att ändra stad i Cities tjänsten
+const homePUTen = async function (nytt) {
+  await fetch(`https://avancera.app/cities/${IDet}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      name: nytt,
+      population: Number(`${datan.nrofdogs}`),
+      id: `${IDet}`
+    })
+  })
+}
+// funktion för att ändra population i Cities tjänsten
+const dogPUTen = async function (nytt) {
+  await fetch(`https://avancera.app/cities/${IDet}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      name: `${datan.hometown}`,
+      population: Number(nytt),
+      id: `${IDet}`
+    })
+  })
+}
+
 // AEL för Edit knapparna
 editNamn.addEventListener("click", () => {
   let nytt = prompt("Vad heter du?");
@@ -228,32 +257,17 @@ editHem.addEventListener("click", () => {
   let nytt = prompt("Vart bor du?");
   console.log(IDet);
   update({ hometown: nytt });
-
-  fetch(`https://avancera.app/cities/${IDet}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      name: `${nytt}`,
-      population: Number(`${datan.nrofdogs}`),
-      id: `${IDet}`
-    })
-  }).then(response => {
-    if (response.status == 201) {
-      alert("vi har fått signal")
-      document.location.reload()
-    }
-  })
+  homePUTen(nytt)
+  alert("Uppdaterar..")
+  document.location.reload()
 })
-
-// ATT LÖSA: Kod ovan laddar inte om sidan men funkar annars.
-// lösning. Lägg en asyn funktion som gör fetch-PUT. låt knapp köra metod & uppdatera sidan.
 
 editNrDogs.addEventListener("click", () => {
   let nytt = Number(prompt("Hur många hundar har du egentligen?"));
   update({ nrofdogs: nytt });
-  setInterval(document.location.reload(), 3000);
+  dogPUTen(nytt)
+  alert("Uppdaterar..")
+  document.location.reload()
 })
 
 // Lånade denna förstår dock inte 100% koden.
@@ -266,17 +280,7 @@ function update(value) {
   sessionStorage.setItem('info', JSON.stringify(prevData));
 }
 
-
-/*   sessionStorage.setItem('info', JSON.stringify({
-    firstName: `${FnamnInfo.value}`,
-    lastName: `${EnamnInfo.value}`,
-    hometown: `${homeTown.value}`,
-    nrofdogs: `${nrOfDogs.value}`,
-    profileDogPic: `${hundbilden}`
-  })) */
-
-
-// REFRESH knappen.
+// REFRESH knappen i profil-Modalen.
 refreshKnappen.addEventListener('click', () => {
   getDog();
   hundbilden = JSON.parse(sessionStorage.getItem('dogpicture'));
@@ -320,7 +324,6 @@ EnamnInfo.addEventListener('input', event => {
   }
 })
 
-
 // Lagra data från formulär. lägg upp data i Cities.
 /* formen.addEventListener('submit', event => {
   sessionStorage.setItem('info', JSON.stringify({
@@ -346,17 +349,6 @@ EnamnInfo.addEventListener('input', event => {
   // console.log("körs cityPoster? om denna syns, ja!")
   // cityPoster();
 }); */
-
-// const getJoke = async function (Noden) {
-//   const jokeData = await fetch('https://icanhazdadjoke.com/', {
-//     headers: {
-//       "Accept": "application/json"
-//     }
-//   });
-//   const jokeObj = await jokeData.json();
-//   Noden.innerHTML = jokeObj.joke;
-// }
-
 
 // Funktion som lägger stad och nummer i cities-tjänsten.
 async function cityPoster() {
