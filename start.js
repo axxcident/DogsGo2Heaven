@@ -28,6 +28,29 @@ fetch("https://my.api.mockaroo.com/data.json", {
 })
 
 
+/* Statistiken */
+
+var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+var yValues = [55, 49, 44, 24, 15];
+var barColors = ["red", "green", "blue", "orange", "brown"];
+
+new Chart("myChart", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    legend: { display: false },
+    title: {
+      display: true,
+      text: "World Wine Production 2018"
+    }
+  }
+});
 
 /*
 const getMock = async function () {

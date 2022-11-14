@@ -21,8 +21,8 @@
 body {
   background-image: url("../img/light-blue-aesthetic.png");
   background-repeat: repeat;
-  height: 100vh;
-  z-index: 1;
+  height: 120vh;
+  z-index: 0;
   overflow-x: hidden;
 }
 
@@ -50,7 +50,7 @@ body {
 
 .floatingbottomcontainer {
   position: absolute;
-  bottom: 10px;
+  bottom: 350px;
   width: 100%;
 }
 
@@ -117,7 +117,7 @@ body {
   }
 }
 
-/* Navigation Logo */
+/* Navigation Logo + middle logo*/
 .logo {
   background-color: var(--nav-blue);
   display: flex;
@@ -144,3 +144,24 @@ body>main>a {
   color: var(--text-fill);
   -webkit-text-stroke: black 2px;
 }
+
+/* Statistiken */
+
+.positionsbox {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+#myChart {
+  width: 100%;
+  max-width: 700px;
+  z-index: 6;
+}
+
+/*   position: absolute;
+  z-index: 6;
+  top: 50vh;
+  left: 50vw; */
