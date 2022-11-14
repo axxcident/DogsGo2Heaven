@@ -64,7 +64,7 @@ body {
   display: flex;
 }
 
-.floatingbox p {
+.floatingbox #sloganet {
   font-size: 1.7em;
   color: var(--text-fill);
   -webkit-text-stroke: black 2px;
@@ -116,6 +116,12 @@ body {
     opacity: 0;
   }
 }
+
+/* #namesake {
+  font-size: .5em;
+  font-style: italic;
+  -webkit-text-stroke: rgb(0, 0, 0) 1px;
+} */
 
 /* Navigation Logo + middle logo*/
 .logo {
