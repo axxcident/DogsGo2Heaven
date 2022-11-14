@@ -1,0 +1,146 @@
+/*
+1. Root & main settings.
+2. Navigation
+3. Navigation Logo
+*/
+
+:root {
+  --nav-blue: #89cef8;
+  --BG-blue: #8dc7e7;
+  --text-fill: #2185c3;
+  --wall-white: #f3f9fa;
+  --btn-text: #dee9f1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url("../img/light-blue-aesthetic.png");
+  background-repeat: repeat;
+  height: 100vh;
+  z-index: 1;
+  overflow-x: hidden;
+}
+
+.main-container {
+  position: relative;
+}
+
+/* Navigation */
+.navigation {
+  width: 100vw;
+  background-color: var(--nav-blue);
+  height: 11vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+}
+
+/* Floating container & boxes */
+.floatingtopcontainer {
+  position: absolute;
+  top: 120px;
+  width: 100%;
+}
+
+.floatingbottomcontainer {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
+
+.flexigcontainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.floatingbox {
+  background-color: transparent;
+  display: flex;
+}
+
+.floatingbox p {
+  font-size: 1.7em;
+  color: var(--text-fill);
+  -webkit-text-stroke: black 2px;
+  animation-name: vanishingAct;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  padding: 0 100px;
+  text-align: center;
+}
+
+@keyframes vanishingAct {
+  0% {
+    opacity: 1;
+  }
+
+  10% {
+    opacity: .95;
+  }
+
+  20% {
+    opacity: .88;
+  }
+
+  30% {
+    opacity: .80;
+  }
+
+  40% {
+    opacity: .75;
+  }
+
+  50% {
+    opacity: .70;
+  }
+
+  60% {
+    opacity: .70;
+  }
+
+  70% {
+    opacity: .25;
+  }
+
+  75% {
+    opacity: .10;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Navigation Logo */
+.logo {
+  background-color: var(--nav-blue);
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.doge {
+  display: flex;
+  background-color: var(--nav-blue);
+  border-radius: 232px;
+}
+
+body>main>a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 145px;
+}
+
+.navigation .logo .top {
+  align-self: center;
+  font-size: 2.5em;
+  color: var(--text-fill);
+  -webkit-text-stroke: black 2px;
+}
