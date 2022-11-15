@@ -4,9 +4,10 @@
 3. Navigation Logo
 4. Navigation CTA
 5. Modal + Formulär
-6. Flow-column
+6. Flödes- kolumnen
 */
 
+/* Root & main settings. */
 :root {
   --nav-blue: #89cef8;
   --BG-blue: #8dc7e7;
@@ -101,9 +102,7 @@ body {
   flex-direction: column;
 }
 
-/* Sätt maximal och minimal storlek. max-width + flex ? */
-/* Generellt behövs width 700 och height 500 */
-/* Finns en variabel som hoppar mellan minsta, preferabla och högsta */
+
 #dogHome {
   border-radius: 10px;
   max-width: 360px;
@@ -119,7 +118,6 @@ body {
 }
 
 /* Flödes- kolumnen  flow-column*/
-
 .flow-column {
   position: relative;
   height: 150vh;
@@ -131,9 +129,6 @@ body {
   top: 141px;
 }
 
-/* .post-2flow {
-  border: black 2px solid;
-} */
 #post-typing {
   width: 72%;
   border-radius: 20px;
@@ -181,12 +176,6 @@ body {
   display: flex;
   justify-self: center;
 }
-
-/* .fa-user {
-  grid-row: 1/5;
-  display: flex;
-  justify-self: center;
-} */
 
 .inlagg .post-name {
   grid-column: 2/6;

@@ -1,10 +1,14 @@
+/*
+1. Selectorer för Buzzwords & statistik.
+2. Fetch åt CSV fil och/eller API.
+  - Lägger upp Buzzwords på Start-sidan.
+3. Funktion/fetch som hämtar statistik data och populattar statistik.
+*/
+
+// 1.
 
 // Selector för alla BuzzWords på start-sidan.
 const texterna = document.querySelectorAll("#sloganet");
-
-// Selecta namn under BuzzWords. (Som skapas av JS, inte HTML).
-// var dummyNames = document.querySelectorAll("#namesake");
-// var spanNames = [];
 
 // Variabler menat åt statistiken.
 // Deklarerade som "var" för att jag använder dem inan/utanför funktionerna.
@@ -16,44 +20,13 @@ var age50 = 0;
 var age60 = 0;
 var agesNum = [];
 
-// Funktion & forEach loop som populattar <span> m fejk-namn.
-// const getName = async function () {
-//   const nameData = await fetch('https://randomuser.me/api/?results=50&inc=name', {
-//     headers: {
-//       "Accept": "application/json"
-//     }
-//   });
-//   const nameObj = await nameData.json();
-//   for (let i = 0; i < 50; i++) {
-//     spanNames.push(nameObj.results[i].name.first)
-//     spanNames.push(nameObj.results[i].name.last)
-//   }
-//   return nameObj.results[i].name.first + " " + nameObj.results[i].name.last
+// 2.
 
-//   /*   Noden.innerHTML += nameObj.results[0].name.first;
-//     Noden.innerHTML += " ";
-//     Noden.innerHTML += nameObj.results[0].name.last; */
-// }
+// CSV fetchen eller API fetchen. Samma data oavsett.
+/* fetch("testData.csv")
+  .then(response => response.text())
+  .then(data => {.... */
 
-/* fetch("https://randomuser.me/api/?results=50&inc=name")
-.then(promise => promise.json())
-.then(resultatet => {
-  var spanNames = [];
-  for (let i = 0; i < 50; i++) {
-    spanNames.push(resultatet.results[i].name.first)
-    spanNames.push(resultatet.results[i].name.last)
-  }
-}) */
-
-// getName()
-// console.log(spanNames);
-
-/* setInterval(() => {
-  console.log("körs denna?")
-  dummyNames.forEach(namn => {
-    namn.innerHTML += `<br>${getName(namn)}`;
-  });
-}, 9500); */
 
 /* fetch("https://my.api.mockaroo.com/data.json", {
   headers: {
@@ -62,8 +35,12 @@ var agesNum = [];
   }
 }).then(........) */
 
-fetch("testData.csv")
-  .then(response => response.text())
+fetch("https://my.api.mockaroo.com/data.json", {
+  headers: {
+    "Accept": "application/json",
+    "X-API-Key": "d04bfc30"
+  }
+}).then(response => response.text())
   .then(data => {
     let grejer = [];
     let inlägg = [];
@@ -86,19 +63,30 @@ fetch("testData.csv")
     }, 9500);
   });
 
-
-
-
+// 3.
 
 /* Statistiken */
 // Data hämtad/gjord i Mockaroo
 // Kan fetcha men använder CSV just nu. får error 429 när jag fetchar.
+/*
+  const datan = await fetch("testData.csv");
+  const datan = await fetch("https://my.api.mockaroo.com/data.json", {
+    headers: {
+      "Accept": "application/json",
+      "X-API-Key": "d04bfc30"
+    }
+  }); */
 
 // Hämtar Integer-ålder & Boolean-medlem. Plussar++ data menat åt BARS i Chart.
 // Till sist skapas new Chart("myChart", ...
 
 const getTestData = async function () {
-  const datan = await fetch("testData.csv");
+  const datan = await fetch("https://my.api.mockaroo.com/data.json", {
+    headers: {
+      "Accept": "application/json",
+      "X-API-Key": "d04bfc30"
+    }
+  });
   const löftet = await datan.text();
 
   const table = löftet.split("\n").slice(1);
@@ -151,7 +139,7 @@ const getTestData = async function () {
       legend: { display: false },
       title: {
         display: true,
-        text: "Sample of members across different ages groups"
+        text: "Sample of members ages in ADG2H"
       },
       scales: {
         yAxes: [{ ticks: { min: 0, max: 20 } }],
@@ -161,30 +149,3 @@ const getTestData = async function () {
 }
 
 getTestData();
-
-
-
-
-
-/*
-const getMock = async function () {
-  const datan = await fetch("https://my.api.mockaroo.com/data.json", {
-    headers: {
-      "Accept": "application/json",
-      "X-API-Key": "d04bfc30"
-    }
-  });
-  const löftet = await datan.text();
-
-  const table = löftet.split("\n").slice(1);
-
-  let listan = [];
-
-  table.forEach(rad => {
-    kolumn = rad.split(",");
-    listan.push(kolumn[4]);
-
-  })
-  let publicera = listan.slice(0, 100)
-}
-getMock(); */

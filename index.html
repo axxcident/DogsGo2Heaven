@@ -5,10 +5,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- min egna CSS -->
   <link rel="stylesheet" href="css/main.css">
+  <!-- Font-Awesome CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <!-- Icon -->
   <link rel="icon" href="/img/inteMinBild.png">
   <title>DogsGo2Heaven</title>
 </head>
@@ -40,7 +44,7 @@
           </div>
           <div class="modal-body">
             <form id="medlem-formular">
-              <!-- action="profil.html" i <form> tar en till andra sidan. Makes sense. Ops funkar ej med event.preventDefault() onsubmit="cityPoster()" -->
+              <!-- action="profil.html" i <form> tar en till andra sidan. Makes sense. Ops funkar ej med event.preventDefault() onsubmit="cityPoster()"  TA BORT INNAN INLAMNING-->
               <label for="firstName">Namn:</label>
               <input type="text" id="firstName" placeholder="T.ex Maximilian">
               <label for="lastName">Efternamn:</label>
@@ -61,7 +65,7 @@
             <input type="button" onclick="cityPoster()" form="medlem-formular" id="send" class="btn btn-primary"
               value="Spara profil">
             <!-- <input id="send" type="submit" onclick="cityPoster()" form="medlem-formular" value="Spara profil"
-              class="btn btn-primary"> -->
+              class="btn btn-primary"> TA BORT INNAN INLAMING -->
             <input id="refresh" type="button" value="Generera ny hundbild" class="btn btn-primary">
           </div>
         </div>
@@ -69,7 +73,6 @@
     </div>
     <!-- så att konsolen inte buggar. -->
     <p id="form-tagaren" style="display: none;"></p>
-    <img src="" alt="ska inte synas" id="dogprofile" style="display: none;">
     <p id="editName" style="display: none;"></p>
     <p id="editLastName" style="display: none;"></p>
     <p id="editHome" style="display: none;"></p>
@@ -140,7 +143,6 @@
         </p>
       </article>
     </section>
-    <!-- ATT-GÖRA: Skapa en Footer -->
   </main>
 
   <script src="app.js"></script>

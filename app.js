@@ -1,12 +1,47 @@
-// ATT GÖRA: lägg till beskrivning på allt
-// Gör numrerad lista.
+/*
+1. Selectorer och funktioner för att publicera inlägg:
 
-// queryselectorer ska vara högst upp enligt Rikardo
+1.1 Selectorer
+1.2 Funktion som sparar en användares inlägg i Web Storage.
+1.3 Kod som visar gamla inlägg på profilsidan.
+1.4 Kod som publicerar inlägg i flödet.
 
-// Kod för att publicera inlägg:
+2. Flödet & dummy-inlägg:
+
+2.1 Funktion & forEach loop som populattar fejk-inlägg m skämt från API.
+2.2 Funktion & forEach loop som populattar fejk-inlägg m fejk-namn från API.
+
+
+3. Kod som lyssnar efter profil-data skapat i Modal/Form/cta för att bli medlem:
+
+3.1 Funktion getDog() som hämtar en hundbild från API.
+3.2 Selectorer för modal / form / profil.html.
+3.3 Kod som kollar ifall profil data finns ifall TRUE:
+  - Skapar profilknapp och byter ut den mot cta-knapp.
+  - skapar / populattar profil.html med profildata + styling.
+
+4. Profilsida:
+
+4.1 Selectorer för profil- edit knappar.
+4.2 Funktioner för profil- edit knappar.
+    - addEventListener:s åt knappar.
+    - Funktioner som ändrar Web storage profil-data.
+    - funktioner som ändrar data i cities-tjänsten.
+
+5. Modal/Form/cta
+
+5.1 Refresh-knapp som hämtar ny hundbild som man kan välja som profilbild.
+5.2 AddEventListeners som lyssnar efter att allt i <form> är ifyllt och kryssat.
+5.3 Funktion i <form> som:
+  - lägger upp värden i Web Storage.
+  - lägger stad och nummer i cities-tjänsten.
+*/
+
+// 1.
+
+// Selectorer som behövs för att publicera inlägg:
 const formular = document.getElementById("post-formularet");
 const pubKnappen = document.getElementById("post-publishing");
-// const textfalt = document.getElementById("post-typing");
 const flowet = document.querySelector("body > main > section");
 
 // Funktion som kan spara ett eller flera inlägg i sessionStorage.
@@ -28,12 +63,9 @@ let postList = function (textPost = null) {
       lista.push(textPost);
     }
   }
-  // return lista;
 }
 
-// knsk uppdatera datan variabeln längre ner?
 let datan = JSON.parse(sessionStorage.getItem('info'));
-
 // Kod för att visa tidigare inlägg. För användare.
 if (datan !== null && sessionStorage.getItem('mypost') !== null) {
   let oldPosts = JSON.parse(sessionStorage.getItem('mypost'));
@@ -104,12 +136,14 @@ formular.addEventListener("submit", event => {
     </p>
     `;
   }
-  // markerar översta noden m QS.
+  // markerar/selectar översta noden m QS.
   let toppen = document.querySelector("body > main > section > article:nth-child(2)");
   // Slänger in nytt inlägg i flödet.
   flowet.insertBefore(nyArtikel, toppen);
 });
 
+
+// 2.
 
 // Selecta <p>s för slumpskämt i flödet.
 let dummyTexts = document.querySelectorAll("#jokeText");
@@ -147,6 +181,7 @@ dummyNames.forEach(namn => {
   namn = getName(namn);
 });
 
+// 3.
 
 // Hämta Hundbild-funktionen
 const getDog = function () {
@@ -178,18 +213,15 @@ let nrOfDogs = document.getElementById("nrofdogs");
 let submitKnappen = document.getElementById("send");
 let refreshKnappen = document.getElementById("refresh");
 // +hundelement
-// profilknappen på båda sidor. Ska byta ut CTA-knappen.
+// profilknappen på båda sidor. Ska byta ut CTA-knappen mot en profilknapp.
 let profileLink = document.getElementById("profilelink");
 let ctaKnappen = document.querySelector(".cta-knappen");
 
 //Displaya bli medlem-inputs DENNA FÖR PROFIL-SIDAN.
-// knsk strax överflödig. Kolla dessa noder.
 let mottagaren = document.getElementById("form-tagaren");
-let profilbild = document.getElementById("dogprofile");
 
-
-// Kollar ifall profildata finns. lägger upp profilknapp.
-// lägger också upp profildata ifall man är på profilsidan. lägg till antal inlägg?
+// Kollar ifall profildata finns & lägger upp profilknapp ifall TRUE.
+// lägger också upp profildata ifall man är på profilsidan.
 console.log("Har profildata laddats up? " + datan);
 if (datan !== null) {
   profileLink.style.display = "flex";
@@ -208,6 +240,7 @@ if (datan !== null) {
     <dd>${datan.nrofdogs}<input type="button" id="editNrDogs" value="Ändra" class="btn btn-primary"></dd>
   </dl>
   `;
+  // Fixar styling på profil-sidan.
   let grej = document.querySelectorAll("#form-tagaren > dl > dd");
   grej.forEach(dd => {
     dd.style.display = "flex";
@@ -261,7 +294,7 @@ const dogPUTen = async function (nytt) {
   })
 }
 
-// AEL för Edit knapparna
+// AddEventListener:s för Edit knapparna
 editNamn.addEventListener("click", () => {
   let nytt = prompt("Vad heter du?");
   update({ firstName: nytt });
@@ -289,7 +322,8 @@ editNrDogs.addEventListener("click", () => {
   document.location.reload()
 })
 
-// Lånade denna förstår dock inte 100% koden.
+// Lånade denna förstår dock inte 100% koden. Lämnar denna kommentar åt dig Richard.
+// En funktion som uppdaterar ett enskilt värde i Web Storage.
 // https://stackoverflow.com/questions/54460512/update-value-on-sessionstorage-object
 function update(value) {
   let prevData = JSON.parse(sessionStorage.getItem('info'));
@@ -299,14 +333,16 @@ function update(value) {
   sessionStorage.setItem('info', JSON.stringify(prevData));
 }
 
-// REFRESH knappen i profil-Modalen.
+// 5.
+
+// REFRESH knappen i profil-Modalen. Hämtar ny hundbild som man kan välja som profilbild.
 refreshKnappen.addEventListener('click', () => {
   getDog();
   hundbilden = JSON.parse(sessionStorage.getItem('dogpicture'));
   hundelement.setAttribute('src', hundbilden);
 })
 
-// lyssna efter att allt i <form> är ifyllt och kryssat. Kan utökas.
+// lyssna efter att allt i <form> är ifyllt och kryssat.
 submitKnappen.disabled = true;
 
 konsent.addEventListener('input', event => {
@@ -343,36 +379,10 @@ EnamnInfo.addEventListener('input', event => {
   }
 })
 
-// Lagra data från formulär. lägg upp data i Cities.
-/* formen.addEventListener('submit', event => {
-  sessionStorage.setItem('info', JSON.stringify({
-    firstName: `${FnamnInfo.value}`,
-    lastName: `${EnamnInfo.value}`,
-    hometown: `${homeTown.value}`,
-    nrofdogs: `${nrOfDogs.value}`,
-    profileDogPic: `${hundbilden}`
-  }))
-  event.preventDefault();
-  // let cityStad = homeTown.value;
-  // let cityNum = nrOfDogs.value;
-
-  // fetch('https://avancera.app/cities/', {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json"
-  //   },
-  //   body: JSON.stringify({ name: `${cityStad}`, population: Number(`${cityNum}`) })
-  // })
-
-  // Denna körs aldrig med "submit". be om hjälp.
-  // console.log("körs cityPoster? om denna syns, ja!")
-  // cityPoster();
-}); */
-
-// Funktion som lägger stad och nummer i cities-tjänsten.
+// Funktion i <form> som:
+// 1. lägger upp värden i Web Storage.
+// 2. lägger stad och nummer i cities-tjänsten.
 async function cityPoster() {
-  console.log("TITTA HIT, cityposter körs");
-
   sessionStorage.setItem('info', JSON.stringify({
     firstName: `${FnamnInfo.value}`,
     lastName: `${EnamnInfo.value}`,
@@ -395,18 +405,3 @@ async function cityPoster() {
     }
   })
 }
-
-// updatePage();
-// const updatePage = function () {
-//   setInterval(document.location.reload(), 20000);
-// }
-
-// själva knappen: submitKnappen
-// själva formuläret: formen
-
-// formen.addEventListener("submit", cityPoster());
-
-// Funkar inte. Be om hjälp.
-// formen.addEventListener("submit", () => {
-//   cityPoster();
-// })
