@@ -44,7 +44,6 @@
           </div>
           <div class="modal-body">
             <form id="medlem-formular">
-              <!-- action="profil.html" i <form> tar en till andra sidan. Makes sense. Ops funkar ej med event.preventDefault() onsubmit="cityPoster()"  TA BORT INNAN INLAMNING-->
               <label for="firstName">Namn:</label>
               <input type="text" id="firstName" placeholder="T.ex Maximilian">
               <label for="lastName">Efternamn:</label>
@@ -64,8 +63,6 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <input type="button" onclick="cityPoster()" form="medlem-formular" id="send" class="btn btn-primary"
               value="Spara profil">
-            <!-- <input id="send" type="submit" onclick="cityPoster()" form="medlem-formular" value="Spara profil"
-              class="btn btn-primary"> TA BORT INNAN INLAMING -->
             <input id="refresh" type="button" value="Generera ny hundbild" class="btn btn-primary">
           </div>
         </div>
@@ -86,6 +83,7 @@
           <input type="submit" id="post-publishing" value="Publicera">
         </form>
       </article>
+      <!-- Nedan följer fake/dummy inlägg i flödet. -->
       <article class="inlagg">
         <img class="npc-user" src="img/npc.png" alt="non-playable character" width="50" height="50">
         <h5 class="post-name" id="fejknamn">John Doe</h5>

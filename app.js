@@ -322,7 +322,7 @@ editNrDogs.addEventListener("click", () => {
   document.location.reload()
 })
 
-// Lånade denna förstår dock inte 100% koden. Lämnar denna kommentar åt dig Richard.
+// Denna funktion är inte min kod. Lämnar denna kommentar åt dig Richard.
 // En funktion som uppdaterar ett enskilt värde i Web Storage.
 // https://stackoverflow.com/questions/54460512/update-value-on-sessionstorage-object
 function update(value) {

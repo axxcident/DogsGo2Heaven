@@ -67,18 +67,12 @@ fetch("https://my.api.mockaroo.com/data.json", {
 
 /* Statistiken */
 // Data hämtad/gjord i Mockaroo
-// Kan fetcha men använder CSV just nu. får error 429 när jag fetchar.
+// ifall Mockaroo API inte funkar så använd CSV med samma data.
 /*
   const datan = await fetch("testData.csv");
-  const datan = await fetch("https://my.api.mockaroo.com/data.json", {
-    headers: {
-      "Accept": "application/json",
-      "X-API-Key": "d04bfc30"
-    }
-  }); */
-
-// Hämtar Integer-ålder & Boolean-medlem. Plussar++ data menat åt BARS i Chart.
-// Till sist skapas new Chart("myChart", ...
+ */
+// Hämtar Integer-ålder & Boolean-medlem. Plussar++ "age" ifall villkor uppfylls.
+// age används sedan till Chart.
 
 const getTestData = async function () {
   const datan = await fetch("https://my.api.mockaroo.com/data.json", {
