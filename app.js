@@ -39,6 +39,9 @@
 
 // 1.
 
+// FÖr online bruk
+import 'css/main.css';
+
 // Selectorer som behövs för att publicera inlägg:
 const formular = document.getElementById("post-formularet");
 const pubKnappen = document.getElementById("post-publishing");
